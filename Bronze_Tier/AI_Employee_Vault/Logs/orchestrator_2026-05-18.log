@@ -1,0 +1,8 @@
+2026-05-18 20:25:18 - Orchestrator - INFO - Qwen Code: Available (running in Qwen Code environment)
+2026-05-18 20:25:18 - Orchestrator - DEBUG - Dashboard updated: Inbox=0, NeedsAction=0, DoneToday=0, DoneThisWeek=0, Approvals=0, ActiveProjects=1
+2026-05-18 20:26:18 - Orchestrator - INFO - File detected: Sra.md at 2026-05-18 20:26:18
+2026-05-18 20:26:18 - Orchestrator - INFO - Processing with Qwen Code: Sra.md
+2026-05-18 20:26:18 - Orchestrator - INFO - Plan created: PLAN_Sra_20260518_202618.md
+2026-05-18 20:26:18 - Orchestrator - INFO - Moved to Done: Sra.md
+2026-05-18 20:26:18 - Orchestrator - DEBUG - Dashboard updated: Inbox=0, NeedsAction=1, DoneToday=1, DoneThisWeek=1, Approvals=0, ActiveProjects=2
+2026-05-18 20:27:18 - Orchestrator - DEBUG - Dashboard updated: Inbox=0, NeedsAction=1, DoneToday=1, DoneThisWeek=1, Approvals=0, ActiveProjects=2
