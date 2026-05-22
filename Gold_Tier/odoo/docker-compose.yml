@@ -1,0 +1,82 @@
+# Odoo Community Edition - Docker Compose
+# Gold Tier AI Employee - Local Accounting System
+#
+# Usage:
+#   docker compose up -d        # Start Odoo + PostgreSQL
+#   docker compose down          # Stop services
+#   docker compose logs -f       # View logs
+#   docker compose restart       # Restart services
+#
+# Access: http://localhost:8069
+# Default admin: admin / admin
+
+services:
+  # ── PostgreSQL Database ─────────────────────────────────────────────
+  db:
+    image: postgres:16
+    container_name: ai-employee-odoo-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: odoo
+      POSTGRES_PASSWORD: odoo
+      POSTGRES_DB: postgres
+    volumes:
+      - odoo-db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - odoo-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U odoo"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Odoo Community Edition ──────────────────────────────────────────
+  odoo:
+    image: odoo:18
+    container_name: ai-employee-odoo
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      HOST: db
+      PORT: 5432
+      USER: odoo
+      PASSWORD: odoo
+    volumes:
+      - odoo-data:/var/lib/odoo
+      - ./odoo-addons:/mnt/extra-addons   # Custom modules (optional)
+      - ./odoo.conf:/etc/odoo/odoo.conf   # Odoo configuration file
+    command: --config=/etc/odoo/odoo.conf
+    ports:
+      - "8069:8069"
+    networks:
+      - odoo-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8069 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  # ── Odoo MCP Health Check (Optional) ────────────────────────────────
+  # Run manually: docker compose run --rm odoo-healthcheck
+  odoo-healthcheck:
+    image: python:3.13-slim
+    container_name: ai-employee-odoo-healthcheck
+    profiles: ["tools"]
+    command: ['python', '-c', 'import xmlrpc.client,sys,json; c=xmlrpc.client.ServerProxy("http://odoo:8069/xmlrpc/2/common"); v=c.version(); print(json.dumps({"status":"healthy","odoo_version":v})); sys.exit(0)']
+    networks:
+      - odoo-network
+
+volumes:
+  odoo-db-data:
+    driver: local
+  odoo-data:
+    driver: local
+
+networks:
+  odoo-network:
+    driver: bridge

@@ -1,0 +1,28 @@
+# AI Employee Gold Tier - Python Dependencies
+# Install with: pip install -r requirements.txt
+
+# Core dependencies
+watchdog>=4.0.0          # File system monitoring for watchers
+
+# Gold Tier dependencies
+google-api-python-client>=2.0.0  # Gmail API
+google-auth-httplib2>=0.1.0      # Gmail authentication
+google-auth-oauthlib>=1.0.0      # Gmail OAuth
+playwright>=1.40.0               # Browser automation (WhatsApp watcher, LinkedIn)
+playwright-stealth>=1.0.0        # Stealth mode to avoid bot detection
+
+# MCP (Model Context Protocol) - AI to Odoo integration
+mcp>=0.1.0                         # Official MCP Python SDK
+
+# Scheduling & Task Management
+croniter>=6.0.0                    # Cron-like scheduling for Ralph Loop
+
+# Odoo XML-RPC client (built-in, no install needed)
+# xmlrpc.client comes with Python standard library
+
+# Utilities
+python-dotenv>=1.0.0             # Load environment variables from .env
+
+# Development dependencies
+# pytest>=7.0.0           # Testing
+# pytest-asyncio>=0.21.0  # Async test support

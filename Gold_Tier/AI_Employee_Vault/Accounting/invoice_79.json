@@ -1,0 +1,13 @@
+{
+  "invoice_id": 79,
+  "customer_name": "KBC Cabin",
+  "customer_id": 91,
+  "amount": 2500.0,
+  "product_name": "Textile",
+  "date": "2026-05-22",
+  "status": "posted",
+  "source": "odoo_mcp_server",
+  "saved_at": "2026-05-22T12:32:29.417757",
+  "posted_at": "2026-05-22T12:32:29.417773",
+  "customer_created": true
+}
